@@ -128,8 +128,8 @@ resource "aws_security_group" "pvt-sg" {
 
 # Ec2 Pub
 resource "aws_instance" "public-ec2" {
-  ami    = "ami-0ad21ae1d0696ad58"
-  instance_type = "t2.small"
+  ami    = "ami-02b8269d5e85954ef"
+  instance_type = "t3.small"
   subnet_id     = aws_subnet.pub-subnet.id
   #key_name   = "ajith22"
   associate_public_ip_address = true
@@ -141,8 +141,8 @@ resource "aws_instance" "public-ec2" {
 
 # EC2 Prvt
 resource "aws_instance" "private-ec2" {
-  ami    = "ami-0ad21ae1d0696ad58"
-  instance_type = "t2.small"
+  ami    = "ami-02b8269d5e85954ef"
+  instance_type = "t3.small"
   subnet_id     = aws_subnet.pvt-subnet.id
   #key_name   = "ajith22"
   vpc_security_group_ids = [aws_security_group.pvt-sg.id]
@@ -161,7 +161,7 @@ resource "aws_internet_gateway" "igw" {
 }
  # EIP # Must Read Before Delete This
  resource "aws_eip" "myeip" {
-   vpc   =  true
+   domain = "vpc"
  }
  #Nat Gate Way
  resource "aws_nat_gateway" "ngw" {
@@ -240,7 +240,7 @@ resource "aws_internet_gateway" "igw" {
 # Create EC2 For Peering Connection
 # resource "aws_instance" "peering-ec2" {
 #   ami    = "ami-0ad21ae1d0696ad58"
-#   instance_type = "t2.micro"
+#   instance_type = "t3.micro"
 #   subnet_id     = aws_subnet.peer-subnet.id
 #   key_name   = "Mumbai-Linux"
 #   vpc_security_group_ids = [aws_security_group.peer-sg.id]
@@ -327,7 +327,7 @@ resource "aws_internet_gateway" "igw" {
 # # Create EC2 For Peering Connection for different region
 # resource "aws_instance" "diff-ec2" {
 #   ami    = "ami-0ad21ae1d0696ad58"
-#   instance_type = "t2.micro"
+#   instance_type = "t3.micro"
 #   subnet_id     = aws_subnet.diff-subnet.id
 #   key_name   = "Mumbai-Linux"
 #   vpc_security_group_ids = [aws_security_group.diff-sg.id]
